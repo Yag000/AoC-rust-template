@@ -9,7 +9,7 @@ for a single year. If you plan to participate in multiple years, you should crea
 
 ### Structure
 
-Each day's solution is organized as a module under `src/dayX`, with a library file (`src/dayX/lib.rs`) containing two functions:  
+Each day's solution is organized as a module under `src/dayX`, with a library file (`src/dayX/mod.rs`) containing two functions:  
 
 - `part1()`: Solves part 1 of the puzzle.  
 - `part2()`: Solves part 2 of the puzzle.  
@@ -34,6 +34,12 @@ Once you've implemented a solution for year `Y`, day `D`, and part `P` (e.g., `d
 
 ```bash
 cargo run -- -y Y -d D P
+```
+
+For example, if you want to run the code for day 18 of year 2022 and for part 2, you would use:
+
+```bash
+cargo run -- -y 2022 -d 18 2
 ```
 
 - **Default Behavior**: If no year (`Y`), day (`D`), or part (`P`) is specified:
