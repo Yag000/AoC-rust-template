@@ -5,7 +5,6 @@ pub struct CommandArgument {
     #[clap(short, long)]
     pub day: Option<u32>,
 
-
     #[clap(short, long)]
     pub year: Option<i32>,
 

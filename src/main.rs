@@ -47,7 +47,8 @@ fn main() -> Result<(), Box<dyn std::error::Error>> {
     let year = command_argument.year.unwrap_or(chrono::Utc::now().year());
 
     if command_argument.all {
-        for day in 1..=last_unlocked_day(year).expect(&format!("AoC {} is not unlocked yet", year))
+        for day in 1..=last_unlocked_day(year)
+            .unwrap_or_else(|| panic!("AoC {} is not unlocked yet", year))
         {
             for part in 1..=2 {
                 println!("Executing day {} part {}", day, part);
@@ -60,7 +61,9 @@ fn main() -> Result<(), Box<dyn std::error::Error>> {
 
     let day = match command_argument.day {
         Some(day) => day,
-        None => last_unlocked_day(year).expect(&format!("AoC {} is not unlocked yet", year)),
+        None => {
+            last_unlocked_day(year).unwrap_or_else(|| panic!("AoC {} is not unlocked yet", year))
+        }
     };
 
     let part = command_argument.part.unwrap_or(1);

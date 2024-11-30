@@ -1,6 +1,5 @@
+use aoc_template::day_executer::execute_day;
 use criterion::{black_box, criterion_group, criterion_main, Criterion};
-
-use aoc_2023::day_executer::execute_day;
 
 fn run_day(c: &mut Criterion, day: u32, part: u32) {
     c.bench_function(&format!("day{}-part{}", day, part), |b| {
