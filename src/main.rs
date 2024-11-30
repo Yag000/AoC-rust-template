@@ -1,7 +1,8 @@
 use std::path::Path;
 
-use aoc_2023::{day_executer::execute_day, parser::CommandArgument};
 use aoc_client::{last_unlocked_day, AocClient};
+use aoc_template::{day_executer::execute_day, parser::CommandArgument};
+use chrono::Datelike;
 use clap::Parser;
 
 fn run_day(
@@ -42,10 +43,12 @@ fn main() -> Result<(), Box<dyn std::error::Error>> {
     dotenv::dotenv().ok();
 
     let command_argument = CommandArgument::parse();
-    let year = 2023;
+
+    let year = command_argument.year.unwrap_or(chrono::Utc::now().year());
 
     if command_argument.all {
-        for day in 1..=last_unlocked_day(year).expect("AoC 2023 is not unlocked yet") {
+        for day in 1..=last_unlocked_day(year).expect(&format!("AoC {} is not unlocked yet", year))
+        {
             for part in 1..=2 {
                 println!("Executing day {} part {}", day, part);
                 run_day(year, day, part, command_argument.publish)?;
@@ -57,7 +60,7 @@ fn main() -> Result<(), Box<dyn std::error::Error>> {
 
     let day = match command_argument.day {
         Some(day) => day,
-        None => last_unlocked_day(year).expect("AoC 2023 is not unlocked yet"),
+        None => last_unlocked_day(year).expect(&format!("AoC {} is not unlocked yet", year)),
     };
 
     let part = command_argument.part.unwrap_or(1);
